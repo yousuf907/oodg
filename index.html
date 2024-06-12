@@ -153,9 +153,9 @@
       <img src="./static/images/the_tunnel_effect_updated.png"
           class="interpolation-image"
           alt="Interpolation end reference image."/>
-      <h2 class="subtitle has-text-centered">    
+      <h2 class="subtitle has-text-justified">    
         <FONT COLOR="#d55e00"><b>The tunnel impedes OOD generalization, which we study using linear probes 
-          trained on ID and OOD datasets for each layer. In this example, identical VGGm-17 architectures 
+          trained on ID and OOD datasets for each layer. In this example, identical VGGm-17 models 
           are trained on identical ID datasets, where only the resolution is changed. Probe accuracy on OOD 
           datasets decreases once the tunnel is reached (denoted by ⭐), where the model trained 
           on low-resolution (32x32) images creates a longer tunnel (layer 9-16) than the one (layer 13-16) 
@@ -349,7 +349,7 @@
       <img src="./static/images/vgg11_tsne_32_224.png"
           class="interpolation-image"
           alt="Interpolation end reference image."/>
-      <h2 class="subtitle has-text-centered">  
+      <h2 class="subtitle has-text-justified">  
         The t-SNE comparison between VGGm-11 models trained on low- (1st row) and high-resolution (2nd row) 
         images of the same ID dataset (ImageNet-100) in an augmentation-free setting. Layer 8 marks the start 
         of the tunnel in VGGm-11 trained on 32x32 images whereas 224x224 resolution does not create any tunnel. 
@@ -382,7 +382,7 @@
             revise the tunnel effect hypothesis as follows:
           </p>
           <p>
-            <FONT COLOR="#000000"><b>An overparameterized N -layer DNN forms two distinct groups:</b>
+            <FONT COLOR="#000000"><b>An overparameterized N-layer DNN forms two distinct groups:</b>
           <p>
             <FONT COLOR="#000000"><b>1. The <i>extractor</i> consists of the first K layers, creating linearly separable representations.</b>
           <p>
