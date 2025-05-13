@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="description"
-        content="What Variables Affect Out-Of-Distribution Generalization in Pretrained Models?">
+        content="What Variables Affect Out-of-Distribution Generalization in Pretrained Models?">
   <meta name="keywords" content="OOD Generalization">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>What Variables Affect Out-Of-Distribution Generalization in Pretrained Models?</title>
+  <title>What Variables Affect Out-of-Distribution Generalization in Pretrained Models?</title>
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
@@ -48,19 +48,19 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">What Variables Affect Out-Of-Distribution Generalization in Pretrained Models?</h1>
+          <h1 class="title is-1 publication-title">What Variables Affect Out-of-Distribution Generalization in Pretrained Models?</h1>
           <div class="is-size-5 publication-authors">
+
             <span class="author-block">
-              Md Yousuf Harun<sup>1*</sup>,</span>
-              <span class="author-block">
-                Kyungbok Lee<sup>2*</sup>,</span>
+              <a href="https://yousuf907.github.io">Md Yousuf Harun</a><sup>1*</sup>,</span>
             <span class="author-block">
-              Jhair Gallardo<sup>1</sup>,</span>
+              <a href="https://www.linkedin.com/in/kyungbok-lee">Kyungbok Lee</a><sup>2*</sup>,</span>
             <span class="author-block">
-              Giri Krishnan<sup>3</sup>,
-            </span>
+              <a href="https://jhairgallardo.github.io">Jhair Gallardo</a><sup>1</sup>,</span>
             <span class="author-block">
-              Christopher Kanan<sup>2</sup>
+              <a href="https://research.gatech.edu/people/giri-krishnan">Giri Krishnan</a><sup>3</sup></span>
+            <span class="author-block">
+              <a href="https://chriskanan.com">Christopher Kanan</a><sup>2</sup></span>
             </span>
           </div>
 
@@ -98,9 +98,25 @@
                   <span>Code</span>
                   </a>
               </span>
+              <!-- Poster Link. -->
+              <span class="link-block">
+                <a href="./static/images/NeurIPS_Poster_OOD_Gen.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-image"></i>
+                  </span>
+                  <span>Poster</span>
+                  </a>
+              </span>
             </div>
-
           </div>
+
+          <div class="column has-text-centered">
+            <p style="font-size: 1.5em; color: #d55e00; font-weight: bold;">
+              Published at NeurIPS 2024
+            </p>
+          </div>
+
         </div>
       </div>
     </div>
@@ -145,22 +161,79 @@
 </section>
 
 
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <!-- Centered Title -->
+    <div class="content has-text-centered">
+      <h2 class="title is-3">The Tunnel Effect Hypothesis</h2>
+    </div>
+
+    <!-- Left-Aligned Caption -->
+    <div class="content">
+
+      <ol>
+        <FONT COLOR="#d55e00"><b>An overparameterized N-layer DNN forms two distinct groups:</b></FONT>
+        <FONT COLOR="#d55e00"><b><li>The <i>extractor</i> consists of the first K layers, creating linearly 
+          separable representations.</li></b></FONT>
+        <FONT COLOR="#d55e00"><b><li>The <i>tunnel</i> comprises the remaining N - K layers, compressing 
+          representations and hindering OOD performance.</li></b></FONT>
+      </ol>
+
+      <ul>
+        <li>Linear probe ID accuracy monotonically increases as a function of layers, but OOD accuracy only increases until the tunnel 
+          is reached and then decreases.</li>
+        <li>Earlier work used datasets with 32✕32 images (CIFAR-10, etc.) for ID training data and did not measure tunnel effect 
+          strength (Masarczyk et al., NeurIPS 2023).</li>
+        <li>Their findings are contrary to widely used transfer learning approaches with ImageNet-1K backbones.</li>
+      </ul>
+    </div>
+
+    <!-- Two Side-by-Side Figures -->
+    <div class="columns is-centered">
+      
+      <!-- ID Perf -->
+      <div class="column">
+        <div class="content has-text-centered">
+          <h3 class="title is-5">In-distribution (CIFAR-10)</h3>
+          <img src="./static/images/the_tunnel_effect_updated_id.png"
+               class="interpolation-image"
+               alt="ID Performance"/>
+        </div>
+      </div>
+
+      <!-- OOD Perf -->
+      <div class="column">
+        <div class="content has-text-centered">
+          <h3 class="title is-5">Out-of-distribution (CIFAR-100)</h3>
+          <img src="./static/images/the_tunnel_effect_updated_ood.png"
+               class="interpolation-image"
+               alt="OOD Performance"/>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
 <section class="section">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-      <h2 class="title is-3">The Tunnel Effect</h2>
+      <h2 class="title is-3">RQ: How does image resolution impact the tunnel strength?</h2>
       <img src="./static/images/the_tunnel_effect_updated.png"
           class="interpolation-image"
           alt="Interpolation end reference image."/>
       <h2 class="subtitle has-text-justified">    
-        <FONT COLOR="#d55e00"><b>The tunnel impedes OOD generalization, which we study using linear probes 
+          The tunnel impedes OOD generalization, which we study using linear probes 
           trained on ID and OOD datasets for each layer. In this example, identical VGGm-17 models 
           are trained on identical ID datasets, where only the resolution is changed. Probe accuracy on OOD 
           datasets decreases once the tunnel is reached (denoted by ⭐), where the model trained 
           on low-resolution (32x32) images creates a longer tunnel (layer 9-16) than the one (layer 13-16) 
           trained on higher-resolution (224x224) images. The Y-axis shows the normalized accuracy. 
-          The OOD curve is the average of 8 OOD datasets, with the standard deviation denoted with shading.</b></FONT>
+          The OOD curve is the average of 8 OOD datasets, with the standard deviation denoted with shading.
       </h2>
       </div>
     </div>
@@ -173,24 +246,62 @@
     <!-- Paper video. -->
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">Is The Tunnel Effect Universal?</h2>
+        <h2 class="title is-3">Quantitative Results: High-Resolution Images Reduce The Tunnel Strength</h2>
         <p>
-          <FONT COLOR="#000000"><b>The tunnel effect is not universal.</b> 
-          In (a), VGGm-11 consisting of max-pool in all 5 stages (φ = 0.5), creates 
-          tunnels (layer 7-10, gray-shaded area). In (b), the same VGGm-11 without 
-          max-pool in the first 2 stages (φ = 1, called VGGm†-11), eliminates the tunnel for all OOD datasets.
+          Increasing image resolution improves OOD performance across all criteria.
+          p-values are denoted by stars. *P < 0.05, **P < 0.01, ***P < 0.001, ****P < 0.0001.
         </p>
-        <h2 class="title is-3">(a) Strong Tunnel Effect</h2>
-          <img src="./static/images/vgg11_ood_32_aug_tunnel_updated.png"
-          class="interpolation-image"
-          alt="Interpolation end reference image."/>
-          <h2 class="title is-3">(b) No Tunnel Effect</h2>
-          <img src="./static/images/vgg11_ood_32_aug_wo_mp_updated.png"
+          <img src="./static/images/bar_plot_res.png"
           class="interpolation-image"
           alt="Interpolation end reference image."/>
       </div>
     </div>
-    <!--/ Paper video. -->
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <!-- Centered Title -->
+    <div class="content has-text-centered">
+      <h2 class="title is-3">RQ: How does augmentation impact the tunnel strength?</h2>
+    </div>
+
+    <!-- Left-Aligned Caption -->
+    <div class="content">
+      <p>
+          <FONT COLOR="#000000"><b>Augmentation reduces the tunnel strength.</b> 
+          In (a), augmentation shifts the tunnel from layer 14 to 22, and in (b) from block 11 to 15. 
+          The OOD curve is the average of 8 OOD datasets with a shaded area indicating a 95% confidence interval. 
+          ⭐ denotes the start of the tunnel.
+        </p>
+    </div>
+
+    <!-- Two Side-by-Side Figures -->
+    <div class="columns is-centered">
+      
+      <!-- ResNet -->
+      <div class="column">
+        <div class="content has-text-centered">
+          <h3 class="title is-5">(a) ResNet</h3>
+          <img src="./static/images/the_aug_effect_resnet34_32_updated.png"
+               class="interpolation-image"
+               alt="ResNet"/>
+        </div>
+      </div>
+
+      <!-- ViT -->
+      <div class="column">
+        <div class="content has-text-centered">
+          <h3 class="title is-5">(b) ViT</h3>
+          <img src="./static/images/the_aug_effect_vit_small_224_updated.png"
+               class="interpolation-image"
+               alt="ViT"/>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
 
@@ -200,18 +311,13 @@
     <!-- Paper video. -->
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">Augmentation Reduces The Tunnel Effect</h2>
+        <h2 class="title is-3">Quantitative Results: Augmentation Reduces The Tunnel Strength</h2>
         <p>
-          In (a), augmentation shifts the tunnel from layer 14 to 22, and in (b) from block 11 to 15. 
-          The OOD curve is the average of 8 OOD datasets with a shaded area indicating a 95% confidence interval. 
-          ⭐ denotes the start of the tunnel.
+          Augmentations increase training data diversity and decrease the tunnel strength. 
+          p-values are denoted by stars. *P < 0.05, **P < 0.01, ***P < 0.001, ****P < 0.0001.
         </p>
-        <h2 class="title is-3">(a) ResNet</h2>
-          <img src="./static/images/the_aug_effect_resnet34_32_updated.png"
-          class="interpolation-image"
-          alt="Interpolation end reference image."/>
-          <h2 class="title is-3">(b) ViT</h2>
-          <img src="./static/images/the_aug_effect_vit_small_224_updated.png"
+        <!--<h2 class="title is-3">(a) ResNet</h2>-->
+          <img src="./static/images/bar_plot_aug.png"
           class="interpolation-image"
           alt="Interpolation end reference image."/>
       </div>
@@ -262,6 +368,99 @@
   </div>
 </section>
 
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">Impact of DNN Variables on The Tunnel Effect</h2>
+        <FONT COLOR="#000000"><b>DNN variables negatively impact the tunnel effect.</b> 
+        <p>
+          (a) Increasing overparameterization level (𝛄) intensifies the tunnel effect and impairs OOD generalization.
+        </p>
+        <p>
+          (b) Increasing DNN depth hurts OOD generalization.
+        </p>
+        <p>
+          (c) Decreasing spatial reduction ratio (ϕ) impairs OOD transfer.
+        </p>
+        <p>
+          (d) Large stem size (k×k) impairs OOD transfer.
+        </p>
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-steve">
+          <h2 class="title is-3">(a) OverParam.</h2>
+          <img src="./static/images/bar_plot_overparam.png"
+          class="interpolation-image"
+          alt="Interpolation end reference image."/>
+        </div>
+        <div class="item item-chair-tp">
+          <h2 class="title is-3">(b) DNN Depth</h2>
+          <img src="./static/images/bar_plot_depth.png"
+          class="interpolation-image"
+          alt="Interpolation end reference image."/>
+        </div>
+        <div class="item item-shiba">
+          <h2 class="title is-3">(c) Spatial Reduction</h2>
+          <img src="./static/images/bar_plot_spr.png"
+          class="interpolation-image"
+          alt="Interpolation end reference image."/>
+        </div>
+        <div class="item item-fullbody">
+          <h2 class="title is-3">(d) Stem</h2>
+          <img src="./static/images/bar_plot_stem.png"
+          class="interpolation-image"
+          alt="Interpolation end reference image."/>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <!-- Centered Title -->
+    <div class="content has-text-centered">
+      <h2 class="title is-3">Is The Tunnel Effect Universal?</h2>
+    </div>
+
+    <!-- Left-Aligned Caption -->
+    <div class="content">
+      <ul>
+        <FONT COLOR="#000000"><b>The tunnel effect is not universal and its strength varies. Among 64 ID backbones, 4 did not 
+          exhibit any tunnel effect.</b> 
+        <li>In (a), VGGm-11 consisting of max-pool in all 5 stages (φ = 0.5), creates tunnels (layer 7-10, gray-shaded area).</li>
+        <li>In (b), the same VGGm-11 without max-pool in the first 2 stages (φ = 1, called VGGm†-11), eliminates the tunnel for all OOD datasets.</li>
+      </ul>
+    </div>
+
+    <!-- Two Side-by-Side Figures -->
+    <div class="columns is-centered">
+      
+      <!-- Strong Tunnel -->
+      <div class="column">
+        <div class="content has-text-centered">
+          <h3 class="title is-5">(a) Strong Tunnel Effect</h3>
+          <img src="./static/images/vgg11_ood_32_aug_tunnel_updated.png"
+               class="interpolation-image"
+               alt="Strong Tunnel"/>
+        </div>
+      </div>
+
+      <!-- No Tunnel -->
+      <div class="column">
+        <div class="content has-text-centered">
+          <h3 class="title is-5">(b) No Tunnel Effect</h3>
+          <img src="./static/images/vgg11_ood_32_aug_wo_mp_updated.png"
+               class="interpolation-image"
+               alt="No Tunnel"/>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
 
 
 <section class="section">
@@ -366,13 +565,40 @@
 </section>
 
 
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <!-- Centered Title -->
+    <div class="content has-text-centered">
+      <h2 class="title is-3">Summary</h2>
+    </div>
+
+    <!-- Left-Aligned Caption -->
+    <div class="content">
+      <ul>
+        <li>It is evident that dataset variables e.g., image resolution, ID class counts, and augmentations show 
+          dominance in altering the tunnel effect.</li>
+        <li>Increasing ID class counts (between-class diversity), using more augmentations (within-class diversity), 
+          and using higher image resolution (hierarchical features) reduce the tunnel effect and improve OOD transfer.</li>
+        <li>DNN variables e.g., over-parameterization, depth etc. increase the tunnel effect but their impact is less 
+          compared to the dataset variables.</li>
+        <li>Concretely, we observe that increasing dataset diversity plays a major role in mitigating the tunnel effect. This 
+          leads us to revise the tunnel effect hypothesis.</li>
+      </ul>
+    </div>
+    </div>
+  </div>
+</section>
+
+
 <section class="section">
   <div class="container is-max-desktop">
     <div class="columns is-centered">
     <!-- Concurrent Work. -->
     <div class="columns is-centered">
       <div class="column is-full-width">
-        <h2 class="title is-3">The Tunnel Effect Hypothesis</h2>
+        <h2 class="title is-3">Revised Tunnel Effect Hypothesis</h2>
 
         <div class="content has-text-justified">
           <p>
@@ -381,28 +607,33 @@
             the number of semantic classes, using augmentations, and higher-resolution images; hence, we 
             revise the tunnel effect hypothesis as follows:
           </p>
-          <p>
-            <FONT COLOR="#000000"><b>An overparameterized N-layer DNN forms two distinct groups:</b>
-          <p>
-            <FONT COLOR="#000000"><b>1. The <i>extractor</i> consists of the first K layers, creating linearly separable representations.</b>
-          <p>
-            <FONT COLOR="#000000"><b>2. The <i>tunnel</i> comprises the remaining N - K layers, compressing representations and hindering OOD performance.</b>
-          <p>
-            <FONT COLOR="#000000"><b>K is proportional to the diversity of training inputs, where if diversity is sufficiently high, N = K.<b>
-          </p>
+
+          <ol>
+            <FONT COLOR="#d55e00"><b>An overparameterized N-layer DNN forms two distinct groups:</b></FONT>
+            <FONT COLOR="#d55e00"><b><li>The <i>extractor</i> consists of the first K layers, creating linearly 
+              separable representations.</li></b></FONT>
+            <FONT COLOR="#d55e00"><b><li>The <i>tunnel</i> comprises the remaining N - K layers, compressing 
+              representations and hindering OOD performance.</li></b></FONT>
+          </ol>
+          <FONT COLOR="#0072b2"><b>K is proportional to the diversity of training inputs, where if diversity is sufficiently high, N = K.</b>
+          
+          <p></p>
+
+          <img src="./static/images/revised_hypothesis.png"
+          class="interpolation-image"
+          alt="Interpolation end reference image."/>
         </div>
       </div>
     </div>
-    <!--/ Concurrent Work. -->
-
   </div>
 </section>
+
 
 <section class="section" id="ACKNOWLEDGMENTS">
   <div class="container is-max-desktop content">
     <h2 class="title">Acknowledgements</h2>
     <p>
-      This work was partly supported by NSF awards #2326491, #2125362, and #2317706.
+      <b>This work was partly supported by NSF awards #2326491, #2125362, and #2317706.</b>
     </p>
   </div>
 </section>
@@ -412,9 +643,9 @@
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
     <pre><code>@article{harun2024variables,
-  title     = {What Variables Affect Out-Of-Distribution Generalization in Pretrained Models?},
+  title     = {What Variables Affect Out-of-Distribution Generalization in Pretrained Models?},
   author    = {Harun, Md Yousuf and Lee, Kyungbok and Gallardo, Jhair and Krishnan, Giri and Kanan, Christopher},
-  journal   = {arXiv preprint arXiv:2405.15018},
+  journal   = {Neural Information Processing Systems},
   year      = {2024}
   }</code></pre>
   </div>
